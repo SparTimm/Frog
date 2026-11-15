@@ -5,6 +5,8 @@ using Game.MinigameFramework.Scripts.Framework.Input;
 using Game.MinigameFramework.Scripts.Framework.PlayerInfo;
 using TMPro;
 using UnityEngine;
+using Witch;
+using Random = UnityEngine.Random;
 
 namespace Frog {
     public class GameManager : MonoBehaviour {
@@ -13,10 +15,29 @@ namespace Frog {
         public float endTimer = 2;
         private MinigameManager.Ranking _ranking = new();
         [HideInInspector] public float timer = 0;
+        [SerializeField] public GameObject ScoreTracker;
+
+        [SerializeField] private FrogMovement frog1;
+        [SerializeField] private FrogMovement frog2;
+        [SerializeField] private FrogMovement frog3;
+        [SerializeField] private FrogMovement frog4;
+        [SerializeField] private WitchMovement witch;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start() {
             _ranking.SetAllPlayersToRank(1); // set all players to first place
+
+            int numPlayers = PlayerManager.GetNumPlayers();
+            int witchNum = 0;
+            if (numPlayers > 0) {
+                witchNum = Random.Range(1,numPlayers + 1);
+                witch.setPlayerNum(witchNum);
+            }
+            frog1.checkPresence(numPlayers,witchNum);
+            frog2.checkPresence(numPlayers,witchNum);
+            frog3.checkPresence(numPlayers,witchNum);
+            frog4.checkPresence(numPlayers,witchNum);
+
             StartCoroutine(GameTimer());
         }
 

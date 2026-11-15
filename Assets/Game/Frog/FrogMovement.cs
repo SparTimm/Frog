@@ -14,6 +14,9 @@ namespace Frog {
         [SerializeField] private AudioClip sfx_hop_3;
         [SerializeField] private AudioClip sfx_hop_4;
         [SerializeField] private AudioClip sfx_land_1;
+        [SerializeField] private ScoreTracker scoreTracker;
+
+        [SerializeField] private int playerNum;
 
         public enum FrogState {
             None,
@@ -56,6 +59,20 @@ namespace Frog {
             }
 
             currentClickAmount = escapeClickAmount;
+        }
+
+        public int getPlayerNum() {
+            return playerNum;
+        }
+
+        public void setPlayerNum(int newNum) {
+            playerNum = newNum;
+        }
+
+        public void checkPresence(int playerCount, int witchPlayer) {
+            if (playerCount < playerNum || witchPlayer == playerNum) {
+                gameObject.SetActive(false);
+            }
         }
 
         void Update() {
@@ -187,6 +204,7 @@ namespace Frog {
         // Eats the given number of flies and returns the result (just pass in 0 to work as a getter for fliesEaten)
         public int EatFly(int numFlies) {
             fliesEaten += numFlies;
+            scoreTracker.addScore(playerNum, 1);
             return fliesEaten;
         }
     }
