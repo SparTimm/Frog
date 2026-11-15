@@ -2,6 +2,7 @@ using Game.MinigameFramework.Scripts.Framework.Input;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game.MinigameFramework.Scripts.Framework.PlayerInfo;
 
 
 namespace Frog {
@@ -11,6 +12,7 @@ namespace Frog {
         bool hasFrog = false;
         public float moveSpeed;
         public static bool isPawnInputEnabled;
+        public int frogsCaught;
         Vector2 moveInput = Vector2.zero;
         Rigidbody rigidBody;
         Vector3 frogPickupSize = new Vector3(3f, 2f, 3f);
@@ -35,6 +37,7 @@ namespace Frog {
         [SerializeField] private AudioClip sfx_footsteps_2;
         [SerializeField] private AudioClip sfx_footsteps_3;
         [SerializeField] private ScoreTracker scoreTracker;
+        [SerializeField] private GameManager gm;
 
         [SerializeField] private int playerNum;
 
@@ -47,6 +50,7 @@ namespace Frog {
         void Start() {
             rigidBody = GetComponent<Rigidbody>();
             AButtonHeld = false;
+            frogsCaught = 0;
         }
         protected override void OnActionPressed(InputAction.CallbackContext context) {
             if (isPawnInputEnabled){
@@ -225,6 +229,11 @@ namespace Frog {
         public void CookFrog() {
             transform.GetComponentInChildren<FrogMovement>().Die();
             hasFrog = false;
+            scoreTracker.addScore(playerNum,8);
+            frogsCaught += 1;
+            if (frogsCaught >= PlayerManager.GetNumPlayers() - 1) {
+                gm.timer = 60;
+            }
         }
 
         private void OnDestroy() {
