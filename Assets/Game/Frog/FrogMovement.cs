@@ -150,6 +150,7 @@ namespace Frog {
 
         public void FrogReleased() {
             transform.GetComponentInParent<WitchMovement>().SetHasFrog();
+            frog.TimerBar.Instance.ResetTimer();
             ChangeCurrentState(FrogMovement.FrogState.None);
             rigidBody.isKinematic = false;
             transform.localPosition = Vector3.zero;
