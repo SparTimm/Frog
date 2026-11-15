@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: FrogMiniGame
   m_EditorClassIdentifier: Assembly-CSharp::Game.MinigameFramework.Scripts.Framework.Minigames.MinigameInfo
   minigameName: Frog
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: b0070be9b84e6432591a6b0d69e93928, type: 3}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 2d94555f836982b4aa4ef0dc59968683, type: 3}
     m_SceneName: FrogScene
   minimumPlayers: 4
-  description: 
-  controls: 
-  credits: 
+  description: 'Frogs - Don''t get boiled alive! Eat flies to gain points!
+
+
+    Witch - Snag all the frogs!'
+  controls: 'Frogs - Use tongue & break out with A
+
+
+    Witch - Catch frogs with A'
+  credits: Freddie, Gabbi, Ritchie, Timm
   attributions: 
