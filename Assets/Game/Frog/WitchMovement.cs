@@ -1,12 +1,10 @@
-using Caul;
-using Frog;
 using Game.MinigameFramework.Scripts.Framework.Input;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-namespace Witch {
+namespace Frog {
 
     public class WitchMovement : Pawn {
 
@@ -16,7 +14,18 @@ namespace Witch {
         Vector2 moveInput = Vector2.zero;
         Rigidbody rigidBody;
         Vector3 frogPickupSize = new Vector3(3f, 2f, 3f);
-        Vector3 cauldronDetectSize = new Vector3(1.5f, 1.5f, 1.5f);
+        Vector3 cauldronDetectSize = new Vector3(4f, 4f, 4f);
+
+        public static WitchMovement Instance { get; private set; }
+
+        private void Awake() {
+            if (Instance != null && Instance != this) {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
 
         [SerializeField] float acceleration;
         [SerializeField] float maxSpeed;
@@ -29,9 +38,12 @@ namespace Witch {
         float footstepTime = 0.3f;
         float footstepCooldown = 0.3f;
 
+        bool AButtonHeld;
+
 
         void Start() {
             rigidBody = GetComponent<Rigidbody>();
+            AButtonHeld = false;
         }
         protected override void OnActionPressed(InputAction.CallbackContext context) {
             if (isPawnInputEnabled){
@@ -43,11 +55,13 @@ namespace Witch {
 
                     if (hasFrog) {
 
+                        AButtonHeld = true;
+
                         Collider[] collisions = Physics.OverlapBox(transform.position, cauldronDetectSize / 2f, transform.rotation);
 
                         foreach (Collider collision in collisions) {
                             if (collision.GetComponent<Cauldron>() != null) {
-                                Destroy(transform.GetComponentInChildren<FrogMovement>().gameObject);
+                                frog.TimerBar.Instance.StartTimer();
                             }
                         }
                     } else {
@@ -102,10 +116,44 @@ namespace Witch {
             }
         }
 
+        protected override void OnActionReleased(InputAction.CallbackContext context) {
+
+            AButtonHeld = false;
+            if (context.action.name == PawnAction.ButtonA && hasFrog) {
+                frog.TimerBar.Instance.ResetTimer();
+            }
+        }
+
         private void GrabFrog(FrogMovement frog) {
             frog.FrogGrabbed(transform.GetComponent<WitchMovement>());
             hasFrog = true;
 
+        }
+
+        private void Update() {
+            if (hasFrog && frog.TimerBar.Instance.isCountDown()) {
+
+                Collider[] collisions = Physics.OverlapBox(transform.position, cauldronDetectSize / 2f, transform.rotation);
+
+                foreach (Collider collision in collisions) {
+                    if (collision.GetComponent<Cauldron>() != null) {
+                        return;
+                    }
+                }
+
+                frog.TimerBar.Instance.ResetTimer();
+            }
+
+            if (hasFrog && !frog.TimerBar.Instance.isCountDown() && AButtonHeld) {
+
+                Collider[] collisions = Physics.OverlapBox(transform.position, cauldronDetectSize / 2f, transform.rotation);
+
+                foreach (Collider collision in collisions) {
+                    if (collision.GetComponent<Cauldron>() != null) {
+                        frog.TimerBar.Instance.StartTimer();
+                    }
+                }
+            }
         }
 
         public void SetHasFrog(bool hasFrog = false) {
@@ -160,6 +208,17 @@ namespace Witch {
                 else if (rngSFX == 3) {
                     sfxSource.PlayOneShot(sfx_footsteps_3);
                 }
+            }
+        }
+
+        public void CookFrog() {
+            transform.GetComponentInChildren<FrogMovement>().Die();
+            hasFrog = false;
+        }
+
+        private void OnDestroy() {
+            if (Instance == this) {
+                Instance = null;
             }
         }
 

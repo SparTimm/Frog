@@ -23,14 +23,14 @@ namespace Frog {
         IEnumerator GameTimer() {
             // Start countdown
             Frog.FrogMovement.isPawnInputEnabled = false;
-            Witch.WitchMovement.isPawnInputEnabled = false;
+            Frog.WitchMovement.isPawnInputEnabled = false;
 
             // Maybe some ckind of countdown animation
 
             yield return new WaitForSeconds(startTimer);
 
             Frog.FrogMovement.isPawnInputEnabled = true;
-            Witch.WitchMovement.isPawnInputEnabled = true;
+            Frog.WitchMovement.isPawnInputEnabled = true;
             // Timer
             while (timer < duration) {
                 timer += Time.deltaTime;
@@ -47,7 +47,7 @@ namespace Frog {
 
             // End
             Frog.FrogMovement.isPawnInputEnabled = false;
-            Witch.WitchMovement.isPawnInputEnabled = false;
+            Frog.WitchMovement.isPawnInputEnabled = false;
             yield return new WaitForSeconds(endTimer);
             MinigameManager.instance.EndMinigame(_ranking);
             StopAllCoroutines(); // prevent EndMinigame from being called multiple times

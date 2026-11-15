@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.MinigameFramework.Scripts.Framework.Input;
 using UnityEngine.InputSystem;
-using Witch;
 
 namespace Frog {
     public class Tongue : MonoBehaviour {

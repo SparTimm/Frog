@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.MinigameFramework.Scripts.Framework.Input;
 using UnityEngine.InputSystem;
-using Witch;
 
 namespace Frog {
 
@@ -141,6 +140,10 @@ namespace Frog {
             rigidBody.linearVelocity = new Vector3(moveInput.x * moveSpeed * 1.5f, jumpHeight, moveInput.y * moveSpeed * 1.5f);
             transform.position = new Vector3(transform.parent.position.x, 1.5f, transform.parent.position.z);
             transform.SetParent(null);
+        }
+
+        public void Die() {
+            Destroy(gameObject);
         }
 
         // Checks to see if the player is no longer moving downwards (aka is on the ground)

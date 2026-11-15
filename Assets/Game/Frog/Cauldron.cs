@@ -1,19 +1,21 @@
 using UnityEngine;
 
 
-namespace Caul {
+namespace Frog {
 
     public class Cauldron : MonoBehaviour {
 
         float flySpawnTime = 4f;
         float flySpawnCooldown = 4f;
+        [SerializeField] private float spawnHeight = 3f;
 
         [SerializeField] private GameObject fly;
 
-        void FixedUpdate() {
+        void Update() {
             if (flySpawnCooldown <= 0) {
                 flySpawnCooldown = flySpawnTime;
-                Instantiate(fly);
+                Vector3 spawnPosition = new Vector3(transform.position.x, spawnHeight,transform.position.z);
+                Instantiate(fly, spawnPosition, Quaternion.identity);
             }
             else {
                 flySpawnCooldown-= Time.deltaTime;
