@@ -24,6 +24,7 @@ namespace Frog {
 
         public void Extend() {
             moveInput = frog.GetMoveInput();
+            if (moveInput == Vector2.zero) moveInput = Vector2.right;
             Vector3 currentRotation = transform.eulerAngles;
             currentRotation.y = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg;
             transform.eulerAngles = currentRotation;

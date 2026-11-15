@@ -19,6 +19,8 @@ namespace Frog {
 
         [SerializeField] private Animator animator;
 
+        private Sprite originalSprite;
+
         public enum FrogState {
             None,
             Grabbed
@@ -57,6 +59,7 @@ namespace Frog {
 
             if (transform.GetChild(0).GetComponent<SpriteRenderer>() != null) {
                 spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+                originalSprite = spriteRenderer.sprite;
             }
 
             currentClickAmount = escapeClickAmount;
@@ -75,6 +78,9 @@ namespace Frog {
         public void checkPresence(int playerCount, int witchPlayer) {
             if (playerCount < playerNum || witchPlayer == playerNum) {
                 gameObject.SetActive(false);
+            }
+            else {
+                gameObject.SetActive(true);
             }
         }
 
@@ -112,7 +118,7 @@ namespace Frog {
 
                     }
                     // Shoot tongue if b is pressed
-                    if (context.action.name == PawnAction.ButtonB && moveInput != Vector2.zero) {
+                    if (context.action.name == PawnAction.ButtonB) {
                         tongue.gameObject.SetActive(true);
                     }
                 }
@@ -155,12 +161,13 @@ namespace Frog {
         public void FrogReleased() {
             transform.GetComponentInParent<WitchMovement>().SetHasFrog();
             frog.TimerBar.Instance.ResetTimer();
+            spriteRenderer.sprite = originalSprite;
             ChangeCurrentState(FrogMovement.FrogState.None);
             rigidBody.isKinematic = false;
             transform.localPosition = Vector3.zero;
             moveInput = Random.insideUnitCircle.normalized;
             rigidBody.linearVelocity = new Vector3(moveInput.x * moveSpeed * 1.5f, jumpHeight, moveInput.y * moveSpeed * 1.5f);
-            transform.position = new Vector3(transform.parent.position.x, 1.5f, transform.parent.position.z);
+            transform.position = new Vector3(transform.parent.position.x, 1.5ff, transform.parent.position.z);
             transform.SetParent(null);
         }
 

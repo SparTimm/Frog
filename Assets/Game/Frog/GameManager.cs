@@ -27,16 +27,11 @@ namespace Frog {
             _ranking = new();
             _ranking.SetAllPlayersToRank(1); // set all players to first place
 
-            //int numPlayers = PlayerManager.GetNumPlayers();
-            //int witchNum = 0;
-            //if (numPlayers > 0) {
-            //    witchNum = Random.Range(1,numPlayers + 1);
-            //    witch.setPlayerNum(witchNum);
-            //}
-            //frog1.checkPresence(numPlayers,witchNum);
-            ////frog2.checkPresence(numPlayers,witchNum);
-            ////frog3.checkPresence(numPlayers,witchNum);
-            ////frog4.checkPresence(numPlayers,witchNum);
+            int numPlayers = PlayerManager.GetNumPlayers();
+            int witchNum = 1;
+            frog1.checkPresence(numPlayers,witchNum);
+            frog2.checkPresence(numPlayers,witchNum);
+            frog3.checkPresence(numPlayers,witchNum);
 
             StartCoroutine(GameTimer());
         }

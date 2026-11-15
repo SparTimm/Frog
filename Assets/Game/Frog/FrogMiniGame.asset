@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65074faa8a836848ae4203c738fad3b, type: 3}
   m_Name: FrogMiniGame
   m_EditorClassIdentifier: Assembly-CSharp::Game.MinigameFramework.Scripts.Framework.Minigames.MinigameInfo
-  minigameName: Frog
+  minigameName: Hop Pot
   thumbnail: {fileID: 21300000, guid: b0070be9b84e6432591a6b0d69e93928, type: 3}
   scene:
     m_SceneAsset: {fileID: 102900000, guid: 2d94555f836982b4aa4ef0dc59968683, type: 3}
@@ -22,9 +22,9 @@ MonoBehaviour:
 
 
     Witch - Snag all the frogs!'
-  controls: 'Frogs - Use tongue & break out with A
+  controls: 'Frogs - Jump & break out with A, Use Tongue With B. Aim Jump with Left Stick.
 
 
-    Witch - Catch frogs with A'
-  credits: Freddie, Gabbi, Ritchie, Timm
+    Witch - Catch frogs with A. Walk with Left Stick.'
+  credits: Freddie, Gabbi, Richie, Timm
   attributions: 
