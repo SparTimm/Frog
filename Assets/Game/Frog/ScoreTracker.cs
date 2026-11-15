@@ -30,13 +30,13 @@ namespace Frog {
                 scoreText.text = "<color=blue>P1: " + pscore_1 + "</color>";
             }
             else if (numPlayers == 2) {
-                scoreText.text = "<color=blue>P1: " + pscore_1 + "</color><color=red> P2: " + pscore_2 + "</color>";
+                scoreText.text = "<color=blue>P1: " + pscore_1 + "</color>   <color=red>P2: " + pscore_2 + "</color>";
             }
             else if (numPlayers == 3) {
-                scoreText.text = "<color=blue>P1: " + pscore_1 + "</color><color=red> P2: " + pscore_2 + "</color><color=green> P3: " + pscore_3 + "</color>";
+                scoreText.text = "<color=blue>P1: " + pscore_1 + "</color>   <color=red>P2: " + pscore_2 + "</color>   <color=green>P3: " + pscore_3 + "</color>";
             }
             else {
-                 scoreText.text = "<color=blue>P1: " + pscore_1 + "</color><color=red> P2: " + pscore_2 + "</color><color=green> P3: " + pscore_3 + "</color><color=yellow> P4: " + pscore_4 + "</color>";
+                 scoreText.text = "<color=blue>P1: " + pscore_1 + "</color>   <color=red>P2: " + pscore_2 + "</color>.  <color=green>P3: " + pscore_3 + "</color>   <color=yellow>P4: " + pscore_4 + "</color>";
             }
             
             

@@ -59,6 +59,10 @@ namespace Frog {
             StartCoroutine(EndMinigame());
         }
 
+        public int getTime() {
+            return (int) timer;
+        }
+
         IEnumerator EndMinigame() {
             
             // Put End animation here
