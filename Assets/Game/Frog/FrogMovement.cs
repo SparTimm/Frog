@@ -17,6 +17,8 @@ namespace Frog {
 
         [SerializeField] private int playerNum;
 
+        [SerializeField] private Animator animator;
+
         public enum FrogState {
             None,
             Grabbed
@@ -58,6 +60,8 @@ namespace Frog {
             }
 
             currentClickAmount = escapeClickAmount;
+
+            animator.Play("FrogIdle", 0, 0f);
         }
 
         public int getPlayerNum() {
