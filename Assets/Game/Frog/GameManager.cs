@@ -19,7 +19,6 @@ namespace Frog {
         [SerializeField] private FrogMovement frog1;
         [SerializeField] private FrogMovement frog2;
         [SerializeField] private FrogMovement frog3;
-        [SerializeField] private FrogMovement frog4;
         [SerializeField] private WitchMovement witch;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,7 +28,7 @@ namespace Frog {
 
             int numPlayers = PlayerManager.GetNumPlayers();
             int witchNum = 1;
-            frog1.checkPresence(numPlayers,witchNum);
+            //frog1.checkPresence(numPlayers,witchNum);
             frog2.checkPresence(numPlayers,witchNum);
             frog3.checkPresence(numPlayers,witchNum);
 
