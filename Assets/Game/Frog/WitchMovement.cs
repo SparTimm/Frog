@@ -34,6 +34,9 @@ namespace Frog {
         [SerializeField] private AudioClip sfx_footsteps_1;
         [SerializeField] private AudioClip sfx_footsteps_2;
         [SerializeField] private AudioClip sfx_footsteps_3;
+        [SerializeField] private ScoreTracker scoreTracker;
+
+        [SerializeField] private int playerNum;
 
         float footstepTime = 0.3f;
         float footstepCooldown = 0.3f;
@@ -158,6 +161,14 @@ namespace Frog {
 
         public void SetHasFrog(bool hasFrog = false) {
             this.hasFrog = hasFrog;
+        }
+
+        public int getPlayerNum() {
+            return playerNum;
+        }
+
+        public void setPlayerNum(int newNum) {
+            playerNum = newNum;
         }
 
         private void FixedUpdate() {

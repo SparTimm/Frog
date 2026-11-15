@@ -17,6 +17,7 @@ namespace Frog {
             body = GetComponent<Rigidbody>();
             body.useGravity = false;
             sprite = GetComponent<SpriteRenderer>();
+            transform.position = new Vector3(0f,0f,0f);
         }
 
         // Update is called once per frame
