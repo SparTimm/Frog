@@ -1,7 +1,7 @@
 using UnityEngine;
 
 using TMPro;
-
+using System.Collections.Generic;
 using Game.MinigameFramework.Scripts.Framework.PlayerInfo;
 
 namespace Frog {
@@ -55,6 +55,10 @@ namespace Frog {
             else if (playerNum == 4) {
                 pscore_4 += scoreNum;
             }
+        }
+
+        public List<int> getScores() {
+            return new List<int> {pscore_1, pscore_2, pscore_3, pscore_4};
         }
     }
 }

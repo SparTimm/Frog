@@ -12,9 +12,9 @@ namespace Frog {
         public float startTimer = 3;
         public float duration = 60;
         public float endTimer = 2;
-        private MinigameManager.Ranking _ranking = new();
+        private MinigameManager.Ranking _ranking;
         [HideInInspector] public float timer = 0;
-        [SerializeField] public GameObject ScoreTracker;
+        [SerializeField] public ScoreTracker scoreTracker;
 
         [SerializeField] private FrogMovement frog1;
         [SerializeField] private FrogMovement frog2;
@@ -24,6 +24,7 @@ namespace Frog {
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start() {
+            _ranking = new();
             _ranking.SetAllPlayersToRank(1); // set all players to first place
 
             //int numPlayers = PlayerManager.GetNumPlayers();
@@ -68,6 +69,8 @@ namespace Frog {
             // Put End animation here
 
             // Rank players here
+            List<int> playerScores = scoreTracker.getScores();
+            _ranking.DetermineRankingFromScores(playerScores);
 
             // End
             Frog.FrogMovement.isPawnInputEnabled = false;
